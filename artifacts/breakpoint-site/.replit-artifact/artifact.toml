@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Breakpoint Product Website"
+description = "A cinematic product website for Breakpoint, a discovery and connection app for curious students and young creators. Designed as an interactive, scroll-driven experience with rich motion and a bold editorial identity."
+version = "1.0.0"
+id = "artifacts/breakpoint-site"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 25402
+
+[services.development]
+run = "pnpm --filter @workspace/breakpoint-site run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/breakpoint-site", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/breakpoint-site/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25402"
+BASE_PATH = "/"

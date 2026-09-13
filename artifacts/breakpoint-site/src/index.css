@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap');
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: hsl(var(--background)); --color-foreground: hsl(var(--foreground)); --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input)); --color-ring: hsl(var(--ring)); --color-card: hsl(var(--card)); --color-card-foreground: hsl(var(--card-foreground));
+  --color-primary: hsl(var(--primary)); --color-primary-foreground: hsl(var(--primary-foreground)); --color-secondary: hsl(var(--secondary)); --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted)); --color-muted-foreground: hsl(var(--muted-foreground)); --color-accent: hsl(var(--accent)); --color-accent-foreground: hsl(var(--accent-foreground));
+  --font-sans: var(--app-font-sans); --font-serif: var(--app-font-serif); --font-mono: var(--app-font-mono);
+  --radius-sm: calc(var(--radius) - 4px); --radius-md: calc(var(--radius) - 2px); --radius-lg: var(--radius); --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  --background: 13 12% 6%; --foreground: 42 32% 95%; --border: 30 10% 18%; --card: 20 11% 10%; --card-foreground: 42 32% 95%;
+  --input: 30 10% 22%; --ring: 18 100% 55%; --primary: 18 100% 55%; --primary-foreground: 13 12% 6%; --secondary: 20 11% 14%; --secondary-foreground: 42 32% 95%;
+  --muted: 24 8% 56%; --muted-foreground: 24 8% 56%; --accent: 53 91% 62%; --accent-foreground: 13 12% 6%; --destructive: 0 68% 52%; --destructive-foreground: 42 32% 95%;
+  --app-font-sans: 'Space Grotesk', sans-serif; --app-font-serif: 'Syne', sans-serif; --app-font-mono: 'DM Mono', monospace; --radius: 1rem;
+  --elevate-1: rgba(255,255,255,.04); --elevate-2: rgba(255,255,255,.08); --button-outline: rgba(255,255,255,.1);
+}
+.dark { --background: 13 12% 6%; --foreground: 42 32% 95%; --card: 20 11% 10%; --card-foreground: 42 32% 95%; --border: 30 10% 18%; --primary: 18 100% 55%; --primary-foreground: 13 12% 6%; --secondary: 20 11% 14%; --secondary-foreground: 42 32% 95%; --muted: 24 8% 56%; --muted-foreground: 24 8% 56%; --accent: 53 91% 62%; --accent-foreground: 13 12% 6%; --input: 30 10% 22%; --ring: 18 100% 55%; }
+
+@layer base {
+  * { @apply border-border; }
+  body { @apply font-sans antialiased bg-background text-foreground; background: #100d08; }
+}
+html { scroll-behavior: smooth; }
+* { box-sizing: border-box; }
+::selection { background: #ff5a1f; color: #100d08; }
+
+.bp-site { overflow: hidden; background: #100d08; color: #f5f0e8; }
+.bp-noise::after { content: ""; position: fixed; inset: 0; z-index: 20; pointer-events: none; opacity: .055; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E"); }
+.bp-display { font-family: var(--app-font-serif); letter-spacing: -.055em; }
+.bp-mono { font-family: var(--app-font-mono); text-transform: uppercase; letter-spacing: .12em; }
+.bp-orange { color: #ff5a1f; }
+.bp-section { position: relative; max-width: 1240px; margin: 0 auto; padding: 150px 40px; }
+.bp-reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1); }
+.bp-reveal.is-visible { opacity: 1; transform: translateY(0); }
+.bp-button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; border: 1px solid transparent; cursor: pointer; border-radius: 100px; transition: transform .25s ease, background .25s ease, color .25s ease, border-color .25s ease; }
+.bp-button:hover { transform: translateY(-3px); }
+.bp-button:active { transform: translateY(0) scale(.98); }
+.bp-button-primary { background: #ff5a1f; color: #180d07; box-shadow: 0 10px 30px #ff5a1f33; }
+.bp-button-primary:hover { background: #ff743f; box-shadow: 0 16px 38px #ff5a1f55; }
+.bp-button-ghost { border-color: #5c5149; color: #f5f0e8; background: #19130f99; }
+.bp-button-ghost:hover { border-color: #ff5a1f; color: #ff9a73; }
+.bp-glow { position: absolute; border-radius: 999px; filter: blur(90px); pointer-events: none; }
+.bp-phone { position: relative; border: 8px solid #2e2926; border-radius: 35px; overflow: hidden; background: #090909; box-shadow: 0 30px 80px #000b, 0 0 0 1px #6e5b4e; }
+.bp-phone::before { content: ""; position: absolute; z-index: 3; top: 8px; left: 50%; transform: translateX(-50%); width: 74px; height: 17px; border-radius: 0 0 12px 12px; background: #120f0d; }
+.bp-phone img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.bp-marquee { white-space: nowrap; overflow: hidden; border-top: 1px solid #332a23; border-bottom: 1px solid #332a23; padding: 18px 0; color: #a09285; }
+.bp-marquee-track { display: inline-flex; animation: bp-marquee 22s linear infinite; }
+.bp-marquee span { margin: 0 24px; }
+@keyframes bp-marquee { to { transform: translateX(-50%); } }
+@keyframes bp-float { 0%,100% { transform: translateY(0) rotate(2deg); } 50% { transform: translateY(-14px) rotate(-1deg); } }
+@keyframes bp-pulse { 0%,100% { transform: scale(1); opacity: .7; } 50% { transform: scale(1.14); opacity: 1; } }
+.bp-float { animation: bp-float 6s ease-in-out infinite; }
+.bp-pulse { animation: bp-pulse 3s ease-in-out infinite; }
+.bp-grid { background-image: linear-gradient(#5946322b 1px, transparent 1px), linear-gradient(90deg, #5946322b 1px, transparent 1px); background-size: 46px 46px; }
+.bp-shine { position: relative; overflow: hidden; }
+.bp-shine::after { content: ""; position: absolute; inset: 0; transform: translateX(-120%); background: linear-gradient(105deg, transparent 35%, #fff2 48%, transparent 60%); transition: transform .7s ease; pointer-events: none; }
+.bp-shine:hover::after { transform: translateX(120%); }
+@media (max-width: 720px) { .bp-section { padding: 94px 22px; } .bp-section .bp-display { font-size: clamp(2.6rem, 13vw, 4.8rem); } .bp-phone { border-width: 6px; border-radius: 25px; } .bp-phone::before { width: 55px; height: 13px; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
